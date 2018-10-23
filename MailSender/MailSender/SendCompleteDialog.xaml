@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MailSender"
         mc:Ignorable="d"
-        Title="SendCompleteDialog" Height="257" Width="514" 
+        Title="Task Complete" Height="257" Width="514" 
         ResizeMode="NoResize">
     <Grid>
         <Label Content="Почта отправлена" Margin="205,80,188,0" Height="26" VerticalAlignment="Top" >

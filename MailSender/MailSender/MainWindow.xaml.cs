@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Net;
-using System.Net.Mail;
 using System.Windows;
 
 
@@ -9,39 +7,26 @@ namespace MailSender
     public partial class MainWindow
     {
         public MainWindow() => InitializeComponent();
+        public string Subject { get { return Subject_TextBox.Text; } }
+        public string EmailBody { get { return EmailBody_TextBox.Text; } }
 
         private void SendButton_OnClick(object sender, RoutedEventArgs e)
         {
-            try
+            string answer = EmailSendServiceClass.SendEmail(UserName_TextBox.Text, Password_PasswordBox.SecurePassword);
+            if (answer != "Ok")
             {
-                using (var email = new MailMessage("shmachilin@yandex.ru", "shmachilin@gmail.com"))
-                {
-                    email.Subject = "Тема письма";
-                    email.Body = "Тело письма";
-
-                    using (var client = new SmtpClient("smtp.yandex.ru"))
-                    {
-                        var user = UserName_TextBox.Text;
-                        var password = Password_PasswordBox.SecurePassword;
-                        client.Credentials = new NetworkCredential(user, password);
-                        client.EnableSsl = true;
-
-                        client.Send(email);
-                    }
-                }
+                var errdlg = new ShowError(answer);
+                errdlg.Owner = this;
+                errdlg.ShowDialog();
             }
-            catch (Exception error)
+            else
             {
-                MessageBox.Show(error.Message, "Error!", MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-                return;
+                //MessageBox.Show("Почта отправлена успешно", "MailSender", MessageBoxButton.OK,
+                //    MessageBoxImage.Information);
+                var dlg = new SendCompleteDialog();
+                dlg.Owner = this;
+                dlg.ShowDialog();
             }
-
-            //MessageBox.Show("Почта отправлена успешно", "MailSender", MessageBoxButton.OK,
-            //    MessageBoxImage.Information);
-            var dlg = new SendCompleteDialog();
-            dlg.Owner = this;
-            dlg.ShowDialog();
         }
-    }
+    }    
 }
