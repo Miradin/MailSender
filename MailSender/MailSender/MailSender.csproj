@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="EmailSendServiceClass.cs" />
     <Compile Include="Info.cs" />
+    <Compile Include="PasswordEncoder.cs" />
     <Compile Include="SendCompleteDialog.xaml.cs">
       <DependentUpon>SendCompleteDialog.xaml</DependentUpon>
     </Compile>

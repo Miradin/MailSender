@@ -10,6 +10,7 @@ namespace MailSender
     {
         public static string SendEmail(string User, SecureString Password)
         {
+            //TODO: Rewrite Exception handler. Pass exception to call function.
             try
             {
                 using (var email = new MailMessage(Info.EmailFrom, Info.EmailTo))
