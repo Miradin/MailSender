@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SpamLib;
 
 namespace MailSenderGUI
 {
@@ -23,6 +24,19 @@ namespace MailSenderGUI
         public MainWindow()
         {
             InitializeComponent();
+            Sender.ToolBarName.Text = "Получатели";
+            Sender.Source.ItemsSource = Senders.Items;
+            Sender.Source.SelectedIndex = 0;
+
+            Server.ToolBarName.Text = "Сервер";
+            Server.Source.ItemsSource = Servers.Items;
+            Server.Source.SelectedIndex = 0;
+            
+        }
+
+        private void Stub()
+        {
+            
         }
 
         private void OnExitClick(object Sender, RoutedEventArgs E)
@@ -46,5 +60,6 @@ namespace MailSenderGUI
             if (MainTabControl.SelectedIndex > 0)
                 MainTabControl.SelectedIndex--;
         }
+
     }
 }
