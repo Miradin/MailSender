@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="MailSenderGUI.View.ToolBarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MailSenderGUI.View"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:spam="clr-namespace:SpamLib;assembly=SpamLib"
+             DataContext="{Binding MainWindow, Source={StaticResource Locator}}"
+             mc:Ignorable="d" 
+             d:DesignHeight="27" d:DesignWidth="350">
+         <StackPanel Orientation="Horizontal" Margin="2">
+
+        <TextBlock Text="{Binding ToolBarName}"  x:Name="ToolBarName"
+                                       VerticalAlignment="Center" 
+                                       Margin="0,0,3,0"/>
+        <ComboBox Width="150" x:Name="Source">
+            <ComboBox.ItemTemplate>
+                <DataTemplate DataType="spam:Sender">
+                    <StackPanel>
+                        <TextBlock>
+                            Имя: <TextBlock Text="{Binding Name}"/>
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Button ToolTip="Добавить" Background="White" x:Name="Add">
+            <StackPanel Orientation="Horizontal">
+                <fa:ImageAwesome Height="16" Icon="PlusCircle" Foreground="Lime"/>
+                <TextBlock Text="Добавить"/>
+            </StackPanel>
+        </Button>
+        <Button ToolTip="Удалить" Background="White" x:Name="Delete">
+            <fa:ImageAwesome Height="16" Icon="MinusCircle" Foreground="Red"/>
+        </Button>
+        <Button ToolTip="Редактировать" Background="White" x:Name="Edit">
+            <fa:ImageAwesome Height="16" Icon="Edit" Foreground="Blue"/>
+        </Button>
+
+
+    </StackPanel>
+</UserControl>
