@@ -15,7 +15,7 @@ namespace MailSenderGUI.ViewModel
     {
         private readonly IDataAccessService _DataAccessService;
 
-        private string _Title = "Заголовок окна";
+        private string _Title = "Рассыльщик писем";
         private string _ToolBarName = "Отправитель";
 
         public string Title
@@ -33,6 +33,7 @@ namespace MailSenderGUI.ViewModel
         public ObservableCollection<Recipient> Recipients { get; private set; }
 
         private Recipient _CurrentRecipient = new Recipient();
+        private Server _CurrentServer = new Server();
 
         public Recipient CurrentRecipient
         {
@@ -40,9 +41,15 @@ namespace MailSenderGUI.ViewModel
             set => Set(ref _CurrentRecipient, value);
         }
 
-        public ICommand UpdateDataCommand { get; }
+        public Server CurrentServer
+        {
+            get => _CurrentServer;
+            set => Set(ref _CurrentServer, value);
+        }
 
+        public ICommand UpdateDataCommand { get; }
         public ICommand CreateNewRecipient { get; }
+        public ICommand CreateNewServer { get; }
         public ICommand UpdateRecipient { get; }
 
         public MainWindowViewModel(IDataAccessService DataAccessService)
@@ -51,8 +58,8 @@ namespace MailSenderGUI.ViewModel
             Recipients = _DataAccessService.GetRecipients();
 
             UpdateDataCommand = new RelayCommand(OnUpdateDataCommandExecuted, UpdateDataCommandCanExecute);
-
             CreateNewRecipient = new RelayCommand(OnCreateNewRecipientExecuted);
+            CreateNewServer = new RelayCommand(OnCreateNewServerExecuted);
             UpdateRecipient = new RelayCommand<Recipient>(OnUpdateRecepientExecuted, UpdateRecepientCanExecute);
         }
 
@@ -67,6 +74,11 @@ namespace MailSenderGUI.ViewModel
         private void OnCreateNewRecipientExecuted()
         {
             CurrentRecipient = new Recipient();
+        }
+
+        private void OnCreateNewServerExecuted()
+        {
+            CurrentServer = new Server();
         }
 
         private bool UpdateRecepientCanExecute(Recipient recipient) => recipient != null;// || _CurrentRecipient != null;

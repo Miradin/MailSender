@@ -25,7 +25,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <Button ToolTip="Добавить" Background="White" x:Name="Add">
+        <Button ToolTip="Добавить" Background="White" x:Name="Add" Command="{Binding CreateNewServer}">
             <StackPanel Orientation="Horizontal">
                 <fa:ImageAwesome Height="16" Icon="PlusCircle" Foreground="Lime"/>
                 <TextBlock Text="Добавить"/>
