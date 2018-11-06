@@ -41,7 +41,7 @@
                     <ToolBarTray Grid.Row="0">
                         <ToolBar>
                             <view:ToolBarView x:Name="Sender">
-                               
+
                             </view:ToolBarView>
                         </ToolBar>
                         <ToolBar Band="1" BandIndex="0">
@@ -144,15 +144,26 @@
                         <Button Content="Отправить немедленно"/>
                     </StackPanel>
                     <GroupBox Grid.Column="1" Header="Список расписания">
-                        <ItemsControl/>
+                        <ItemsControl>
+                            <RichTextBox Margin="0">
+                                <FlowDocument>
+                                    <Paragraph>
+                                        <Run Text="RichTextBox"/>
+                                    </Paragraph>
+                                </FlowDocument>
+                            </RichTextBox>
+                        </ItemsControl>
                         <!--<ContentControl/>-->
                     </GroupBox>
                 </Grid>
             </TabItem>
             <TabItem Header="Редактор писем">
-                <Grid>
-                    <RichTextBox/>
-                </Grid>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Тема письма:"/>
+                    <TextBox/>
+                    <TextBlock Text="Текст:"/>
+                    <RichTextBox Height="480"/>
+                </StackPanel>
             </TabItem>
             <TabItem IsEnabled="False">
                 <TabItem.Header>

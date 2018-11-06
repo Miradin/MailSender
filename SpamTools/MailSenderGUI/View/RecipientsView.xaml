@@ -23,7 +23,7 @@
         </DockPanel>
         <Button DockPanel.Dock="Bottom" Content="Обновить данные" 
                 Command="{Binding UpdateDataCommand}"
-                HorizontalAlignment="Center" Padding="10,5" Margin="0,5"/>
+                HorizontalAlignment="Center" Padding="10,5" Margin="0,5" />
         <!--<DataGrid ItemsSource="{Binding Recipients}"
                   SelectedItem="{Binding CurrentRecipient}"
                   AutoGenerateColumns="False" IsReadOnly="True"
