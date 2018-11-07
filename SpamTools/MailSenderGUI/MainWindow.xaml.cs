@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SpamLib;
+using System.Diagnostics;
+
 
 namespace MailSenderGUI
 {
@@ -34,10 +36,6 @@ namespace MailSenderGUI
             
         }
 
-        private void Stub()
-        {
-            
-        }
 
         private void OnExitClick(object Sender, RoutedEventArgs E)
         {
@@ -59,6 +57,36 @@ namespace MailSenderGUI
         {
             if (MainTabControl.SelectedIndex > 0)
                 MainTabControl.SelectedIndex--;
+        }
+
+        private void OnAddServer(object Sender, EventArgs E)
+        {
+            Trace.WriteLine("Add Server button");
+        }
+
+        private void OnDeleteServer(object Sender, EventArgs E)
+        {
+            Trace.WriteLine("Delete Server button");
+        }
+
+        private void OnEditServer(object Sender, EventArgs E)
+        {
+            Trace.WriteLine("Edit Server button");
+        }
+
+        private void OnAddRecipient(object Sender, EventArgs E)
+        {
+            Trace.WriteLine("Add Recipient button");
+        }
+
+        private void OnDeleteRecipient(object Sender, EventArgs E)
+        {
+            Trace.WriteLine("Delete Recipient button");
+        }
+
+        private void OnEditRecipient(object Sender, EventArgs E)
+        {
+            Trace.WriteLine("Edit Recipient button");
         }
 
     }
