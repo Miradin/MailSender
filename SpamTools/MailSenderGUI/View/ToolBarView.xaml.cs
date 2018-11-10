@@ -20,9 +20,49 @@ namespace MailSenderGUI.View
     /// </summary>
     public partial class ToolBarView : UserControl
     {
+        public event EventHandler OnAddServer;
+        public event EventHandler OnDeleteServer;
+        public event EventHandler OnEditServer;
+
+        public event EventHandler OnAddRecipient;
+        public event EventHandler OnDeleteRecipient;
+        public event EventHandler OnEditRecipient;
+
         public ToolBarView()
         {
             InitializeComponent();
+        }
+
+        private void OnButtonclick(object Sender, RoutedEventArgs E)
+        {
+            if (!(Sender is Button button)) return;
+
+            string c = ToolBarName.Text;
+            switch (c)
+            {
+                case "Сервер":
+                    if (button.Name as string == "Add")
+                        OnAddServer?.Invoke(this, EventArgs.Empty);
+
+                    if (button.Name as string == "Delete")
+                        OnDeleteServer?.Invoke(this, EventArgs.Empty);
+
+                    if (button.Name as string == "Edit")
+                        OnEditServer?.Invoke(this, EventArgs.Empty);
+                    break;
+                case "Получатели":
+                    if (button.Name as string == "Add")
+                        OnAddRecipient?.Invoke(this, EventArgs.Empty);
+
+                    if (button.Name as string == "Delete")
+                        OnDeleteRecipient?.Invoke(this, EventArgs.Empty);
+
+                    if (button.Name as string == "Edit")
+                        OnEditRecipient?.Invoke(this, EventArgs.Empty);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
