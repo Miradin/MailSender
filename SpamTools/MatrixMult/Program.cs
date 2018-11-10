@@ -102,12 +102,12 @@ namespace MatrixMult
                        while (rwlock == false)
                        {
                            Thread.Sleep(100);
-                           using (System.IO.StreamWriter file =
-                           new System.IO.StreamWriter("d:/temp/test/result.txt", true))
-                               {
-                                   file.WriteLine(result.ToString());
-                               }
                        }
+                       rwlock = false;
+                       using (System.IO.StreamWriter file =new System.IO.StreamWriter("d:/temp/test/result.txt", true))
+                           {
+                               file.WriteLine(result.ToString());
+                           }
                        rwlock = true;
                        Console.WriteLine(result.ToString());
                        //FileInfo fi = new FileInfo(files[i]);
