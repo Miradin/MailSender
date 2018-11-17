@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreadingCalc", "ThreadingC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatrixMult", "MatrixMult\MatrixMult.csproj", "{7BEE3D76-08C7-4306-9DAF-882B41231CF3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketPortal", "TicketPortal\TicketPortal.csproj", "{6C335657-74E0-45AC-AB16-B576A4F1DB2B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{7BEE3D76-08C7-4306-9DAF-882B41231CF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BEE3D76-08C7-4306-9DAF-882B41231CF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BEE3D76-08C7-4306-9DAF-882B41231CF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C335657-74E0-45AC-AB16-B576A4F1DB2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C335657-74E0-45AC-AB16-B576A4F1DB2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C335657-74E0-45AC-AB16-B576A4F1DB2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C335657-74E0-45AC-AB16-B576A4F1DB2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

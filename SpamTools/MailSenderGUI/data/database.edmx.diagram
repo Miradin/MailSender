@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9e0c0ac68e944753b2b428dad42ab614" Name="Diagram1" >
+        <EntityTypeShape EntityType="database.Recipient" Width="1.5" PointX="2.625" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="database.MailingList" Width="1.5" PointX="4.75" PointY="1.25" />
+        <AssociationConnector Association="database.RecipientMailingList" />
+        <EntityTypeShape EntityType="database.Email" Width="1.5" PointX="10.5" PointY="1.625" />
+        <EntityTypeShape EntityType="database.SchedulerTask" Width="1.5" PointX="8" PointY="1.375" />
+        <EntityTypeShape EntityType="database.Sender" Width="1.5" PointX="5.125" PointY="4.125" />
+        <EntityTypeShape EntityType="database.Server" Width="1.5" PointX="8.875" PointY="4.75" />
+        <AssociationConnector Association="database.MailingListSchedulerTask" />
+        <AssociationConnector Association="database.SchedulerTaskEmail" />
+        <AssociationConnector Association="database.SenderSchedulerTask" />
+        <AssociationConnector Association="database.ServerSchedulerTask" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,465 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="database.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="databaseStoreContainer">
+    <EntitySet Name="Recipients" EntityType="database.Store.Recipients" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MailingLists" EntityType="database.Store.MailingLists" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Emails" EntityType="database.Store.Emails" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SchedulerTasks" EntityType="database.Store.SchedulerTasks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Senders" EntityType="database.Store.Senders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Servers" EntityType="database.Store.Servers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RecipientMailingList" EntityType="database.Store.RecipientMailingList" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SchedulerTaskEmail" EntityType="database.Store.SchedulerTaskEmail" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_RecipientMailingList_Recipient" Association="database.Store.FK_RecipientMailingList_Recipient">
+      <End Role="Recipient" EntitySet="Recipients" />
+      <End Role="RecipientMailingList" EntitySet="RecipientMailingList" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RecipientMailingList_MailingList" Association="database.Store.FK_RecipientMailingList_MailingList">
+      <End Role="MailingList" EntitySet="MailingLists" />
+      <End Role="RecipientMailingList" EntitySet="RecipientMailingList" />
+    </AssociationSet>
+    <AssociationSet Name="MailingListSchedulerTask" Association="database.Store.MailingListSchedulerTask">
+      <End Role="MailingList" EntitySet="MailingLists" />
+      <End Role="SchedulerTask" EntitySet="SchedulerTasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SchedulerTaskEmail_SchedulerTask" Association="database.Store.FK_SchedulerTaskEmail_SchedulerTask">
+      <End Role="SchedulerTask" EntitySet="SchedulerTasks" />
+      <End Role="SchedulerTaskEmail" EntitySet="SchedulerTaskEmail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SchedulerTaskEmail_Email" Association="database.Store.FK_SchedulerTaskEmail_Email">
+      <End Role="Email" EntitySet="Emails" />
+      <End Role="SchedulerTaskEmail" EntitySet="SchedulerTaskEmail" />
+    </AssociationSet>
+    <AssociationSet Name="SenderSchedulerTask" Association="database.Store.SenderSchedulerTask">
+      <End Role="Sender" EntitySet="Senders" />
+      <End Role="SchedulerTask" EntitySet="SchedulerTasks" />
+    </AssociationSet>
+    <AssociationSet Name="ServerSchedulerTask" Association="database.Store.ServerSchedulerTask">
+      <End Role="Server" EntitySet="Servers" />
+      <End Role="SchedulerTask" EntitySet="SchedulerTasks" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Recipients">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="MailingLists">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Emails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="SchedulerTasks">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Time" Type="datetime" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="MailingList_Id" Type="int" Nullable="true" />
+    <Property Name="Sender_Id" Type="int" Nullable="false" />
+    <Property Name="Server_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Senders">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Login" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Servers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Port" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UseSSL" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RecipientMailingList">
+    <Key>
+      <PropertyRef Name="Recipient_Id" />
+      <PropertyRef Name="MailingLists_Id" />
+    </Key>
+    <Property Name="Recipient_Id" Type="int" Nullable="false" />
+    <Property Name="MailingLists_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SchedulerTaskEmail">
+    <Key>
+      <PropertyRef Name="SchedulerTask_Id" />
+      <PropertyRef Name="Emails_Id" />
+    </Key>
+    <Property Name="SchedulerTask_Id" Type="int" Nullable="false" />
+    <Property Name="Emails_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="MailingListSchedulerTask">
+    <End Role="MailingList" Type="database.Store.MailingLists" Multiplicity="0..1" />
+    <End Role="SchedulerTask" Type="database.Store.SchedulerTasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MailingList">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SchedulerTask">
+        <PropertyRef Name="MailingList_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SenderSchedulerTask">
+    <End Role="Sender" Type="database.Store.Senders" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SchedulerTask" Type="database.Store.SchedulerTasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sender">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SchedulerTask">
+        <PropertyRef Name="Sender_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ServerSchedulerTask">
+    <End Role="Server" Type="database.Store.Servers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SchedulerTask" Type="database.Store.SchedulerTasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Server">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SchedulerTask">
+        <PropertyRef Name="Server_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RecipientMailingList_Recipient">
+    <End Role="Recipient" Type="database.Store.Recipients" Multiplicity="1" />
+    <End Role="RecipientMailingList" Type="database.Store.RecipientMailingList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recipient">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RecipientMailingList">
+        <PropertyRef Name="Recipient_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RecipientMailingList_MailingList">
+    <End Role="RecipientMailingList" Type="database.Store.RecipientMailingList" Multiplicity="*" />
+    <End Role="MailingList" Type="database.Store.MailingLists" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="MailingList">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RecipientMailingList">
+        <PropertyRef Name="MailingLists_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SchedulerTaskEmail_SchedulerTask">
+    <End Role="SchedulerTask" Type="database.Store.SchedulerTasks" Multiplicity="1" />
+    <End Role="SchedulerTaskEmail" Type="database.Store.SchedulerTaskEmail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SchedulerTask">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SchedulerTaskEmail">
+        <PropertyRef Name="SchedulerTask_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SchedulerTaskEmail_Email">
+    <End Role="SchedulerTaskEmail" Type="database.Store.SchedulerTaskEmail" Multiplicity="*" />
+    <End Role="Email" Type="database.Store.Emails" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Email">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SchedulerTaskEmail">
+        <PropertyRef Name="Emails_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="database" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="SpamDatabase" annotation:LazyLoadingEnabled="false">
+          <EntitySet Name="Recipients" EntityType="database.Recipient" />
+          <EntitySet Name="MailingLists" EntityType="database.MailingList" />
+          <AssociationSet Name="RecipientMailingList" Association="database.RecipientMailingList">
+            <End Role="Recipient" EntitySet="Recipients" />
+            <End Role="MailingList" EntitySet="MailingLists" />
+          </AssociationSet>
+          <EntitySet Name="Emails" EntityType="database.Email" />
+          <EntitySet Name="SchedulerTasks" EntityType="database.SchedulerTask" />
+          <EntitySet Name="Senders" EntityType="database.Sender" />
+          <EntitySet Name="Servers" EntityType="database.Server" />
+          <AssociationSet Name="MailingListSchedulerTask" Association="database.MailingListSchedulerTask">
+            <End Role="MailingList" EntitySet="MailingLists" />
+            <End Role="SchedulerTask" EntitySet="SchedulerTasks" />
+          </AssociationSet>
+          <AssociationSet Name="SchedulerTaskEmail" Association="database.SchedulerTaskEmail">
+            <End Role="SchedulerTask" EntitySet="SchedulerTasks" />
+            <End Role="Email" EntitySet="Emails" />
+          </AssociationSet>
+          <AssociationSet Name="SenderSchedulerTask" Association="database.SenderSchedulerTask">
+            <End Role="Sender" EntitySet="Senders" />
+            <End Role="SchedulerTask" EntitySet="SchedulerTasks" />
+          </AssociationSet>
+          <AssociationSet Name="ServerSchedulerTask" Association="database.ServerSchedulerTask">
+            <End Role="Server" EntitySet="Servers" />
+            <End Role="SchedulerTask" EntitySet="SchedulerTasks" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Recipient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="true" Unicode="true" />
+          <NavigationProperty Name="MailingLists" Relationship="database.RecipientMailingList" FromRole="Recipient" ToRole="MailingList" />
+        </EntityType>
+        <EntityType Name="MailingList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="true" Unicode="true" />
+          <NavigationProperty Name="Recipients" Relationship="database.RecipientMailingList" FromRole="MailingList" ToRole="Recipient" />
+          <NavigationProperty Name="SchedulerTasks" Relationship="database.MailingListSchedulerTask" FromRole="MailingList" ToRole="SchedulerTask" />
+        </EntityType>
+        <Association Name="RecipientMailingList">
+          <End Type="database.Recipient" Role="Recipient" Multiplicity="*" />
+          <End Type="database.MailingList" Role="MailingList" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Email">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" Unicode="true" />
+          <Property Name="Body" Type="String" Nullable="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="true" Unicode="true" />
+          <NavigationProperty Name="SchedulerTask" Relationship="database.SchedulerTaskEmail" FromRole="Email" ToRole="SchedulerTask" />
+        </EntityType>
+        <EntityType Name="SchedulerTask">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" Unicode="true" />
+          <Property Name="Time" Type="DateTime" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="true" Unicode="true" />
+          <NavigationProperty Name="MailingList" Relationship="database.MailingListSchedulerTask" FromRole="SchedulerTask" ToRole="MailingList" />
+          <NavigationProperty Name="Emails" Relationship="database.SchedulerTaskEmail" FromRole="SchedulerTask" ToRole="Email" />
+          <NavigationProperty Name="Sender" Relationship="database.SenderSchedulerTask" FromRole="SchedulerTask" ToRole="Sender" />
+          <NavigationProperty Name="Server" Relationship="database.ServerSchedulerTask" FromRole="SchedulerTask" ToRole="Server" />
+        </EntityType>
+        <EntityType Name="Sender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <Property Name="Login" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+          <NavigationProperty Name="SchedulerTasks" Relationship="database.SenderSchedulerTask" FromRole="Sender" ToRole="SchedulerTask" />
+        </EntityType>
+        <EntityType Name="Server">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <Property Name="Address" Type="String" Nullable="false" />
+          <Property Name="Port" Type="String" Nullable="false" />
+          <Property Name="UseSSL" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SchedulerTasks" Relationship="database.ServerSchedulerTask" FromRole="Server" ToRole="SchedulerTask" />
+        </EntityType>
+        <Association Name="MailingListSchedulerTask">
+          <End Type="database.MailingList" Role="MailingList" Multiplicity="0..1" />
+          <End Type="database.SchedulerTask" Role="SchedulerTask" Multiplicity="*" />
+        </Association>
+        <Association Name="SchedulerTaskEmail">
+          <End Type="database.SchedulerTask" Role="SchedulerTask" Multiplicity="*" />
+          <End Type="database.Email" Role="Email" Multiplicity="*" />
+        </Association>
+        <Association Name="SenderSchedulerTask">
+          <End Type="database.Sender" Role="Sender" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="database.SchedulerTask" Role="SchedulerTask" Multiplicity="*" />
+        </Association>
+        <Association Name="ServerSchedulerTask">
+          <End Type="database.Server" Role="Server" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="database.SchedulerTask" Role="SchedulerTask" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="databaseStoreContainer" CdmEntityContainer="SpamDatabase">
+    <EntitySetMapping Name="Recipients">
+      <EntityTypeMapping TypeName="IsTypeOf(database.Recipient)">
+        <MappingFragment StoreEntitySet="Recipients">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MailingLists">
+      <EntityTypeMapping TypeName="IsTypeOf(database.MailingList)">
+        <MappingFragment StoreEntitySet="MailingLists">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Emails">
+      <EntityTypeMapping TypeName="IsTypeOf(database.Email)">
+        <MappingFragment StoreEntitySet="Emails">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Body" ColumnName="Body" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SchedulerTasks">
+      <EntityTypeMapping TypeName="IsTypeOf(database.SchedulerTask)">
+        <MappingFragment StoreEntitySet="SchedulerTasks">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Senders">
+      <EntityTypeMapping TypeName="IsTypeOf(database.Sender)">
+        <MappingFragment StoreEntitySet="Senders">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Servers">
+      <EntityTypeMapping TypeName="IsTypeOf(database.Server)">
+        <MappingFragment StoreEntitySet="Servers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Port" ColumnName="Port" />
+          <ScalarProperty Name="UseSSL" ColumnName="UseSSL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="RecipientMailingList" TypeName="database.RecipientMailingList" StoreEntitySet="RecipientMailingList">
+      <EndProperty Name="Recipient">
+        <ScalarProperty Name="Id" ColumnName="Recipient_Id" />
+      </EndProperty>
+      <EndProperty Name="MailingList">
+        <ScalarProperty Name="Id" ColumnName="MailingLists_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="MailingListSchedulerTask" TypeName="database.MailingListSchedulerTask" StoreEntitySet="SchedulerTasks">
+      <EndProperty Name="MailingList">
+        <ScalarProperty Name="Id" ColumnName="MailingList_Id" />
+      </EndProperty>
+      <EndProperty Name="SchedulerTask">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="MailingList_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SchedulerTaskEmail" TypeName="database.SchedulerTaskEmail" StoreEntitySet="SchedulerTaskEmail">
+      <EndProperty Name="SchedulerTask">
+        <ScalarProperty Name="Id" ColumnName="SchedulerTask_Id" />
+      </EndProperty>
+      <EndProperty Name="Email">
+        <ScalarProperty Name="Id" ColumnName="Emails_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SenderSchedulerTask" TypeName="database.SenderSchedulerTask" StoreEntitySet="SchedulerTasks">
+      <EndProperty Name="Sender">
+        <ScalarProperty Name="Id" ColumnName="Sender_Id" />
+      </EndProperty>
+      <EndProperty Name="SchedulerTask">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ServerSchedulerTask" TypeName="database.ServerSchedulerTask" StoreEntitySet="SchedulerTasks">
+      <EndProperty Name="Server">
+        <ScalarProperty Name="Id" ColumnName="Server_Id" />
+      </EndProperty>
+      <EndProperty Name="SchedulerTask">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
